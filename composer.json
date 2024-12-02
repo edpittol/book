@@ -98,6 +98,9 @@
     },
     "require-dev": {
         "codeception/codeception": "^5.1",
+        "codeception/module-asserts": "^3.0",
+        "codeception/module-phpbrowser": "^3.0",
+        "codeception/module-symfony": "^3.5",
         "phpunit/phpunit": "^11.4",
         "symfony/browser-kit": "7.2.*",
         "symfony/css-selector": "7.2.*",
