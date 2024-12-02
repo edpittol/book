@@ -13,3 +13,8 @@ modules:
 #        - Doctrine:
 #              depends: Symfony
 #              cleanup: true
+        - Phiremock:
+            host: localhost
+            port: 8086
+            secure: false
+            reset_before_each_test: true
