@@ -15,6 +15,6 @@ class FirstCest
     public function tryToTest(FunctionalTester $I)
     {
         $I->amOnPage('/');
-        $I->see('I am ready!');
+        $I->seeNumberOfElements('p', 10);
     }
 }
