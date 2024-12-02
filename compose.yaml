@@ -1,25 +1,67 @@
-
 services:
-###> doctrine/doctrine-bundle ###
-  database:
-    image: postgres:${POSTGRES_VERSION:-16}-alpine
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB:-app}
-      # You should definitely change the password in production
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-!ChangeMe!}
-      POSTGRES_USER: ${POSTGRES_USER:-app}
-    healthcheck:
-      test: ["CMD", "pg_isready", "-d", "${POSTGRES_DB:-app}", "-U", "${POSTGRES_USER:-app}"]
-      timeout: 5s
-      retries: 5
-      start_period: 60s
+  php:
+    build:
+      context: .
+    working_dir: "/app"
     volumes:
-      - database_data:/var/lib/postgresql/data:rw
-      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
-      # - ./docker/db/data:/var/lib/postgresql/data:rw
-###< doctrine/doctrine-bundle ###
+      - ".:/app"
 
-volumes:
-###> doctrine/doctrine-bundle ###
-  database_data:
-###< doctrine/doctrine-bundle ###
+  symfony-cli:
+    extends:
+      service: php
+    entrypoint: ["/usr/local/bin/symfony"]
+    volumes:
+      - ~/.docker_cache/composer:/.composer/cache/
+      - ~/.docker_cache/symfony5:/.symfony5
+      - ~/.gitconfig:/.gitconfig
+
+  composer:
+    extends:
+      service: php
+    entrypoint: ["/usr/bin/composer"]
+    volumes:
+      - "~/.docker_cache/composer:/.cache"
+
+  server:
+    extends:
+      service: php
+    command: ["-S", "0.0.0.0:8080", "--docroot", "/app/public"]
+    ports:
+      - "8080:8080"
+
+  codecept:
+    extends:
+      service: composer
+    entrypoint: ["vendor/bin/codecept"]
+    volumes:
+      - "./.phiremock:/.phiremock"
+  
+  chrome:
+    image: selenium/node-chrome
+    shm_size: 2g
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_OPTS=--log-level OFF --enable-managed-downloads true
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_DRAIN_AFTER_SESSION_COUNT=50
+      - VNC_NO_PASSWORD=1
+      - TMPDIR=/var/tmp
+      - SE_JAVA_OPTS=-XX:-UsePerfData
+
+  selenium-hub:
+    image: selenium/hub
+    environment:
+      - SE_OPTS=--log-level OFF
+    ports:
+      - "4444:4444"
+
+  phiremock:
+    extends:
+      service: php
+    entrypoint: ["vendor/bin/phiremock"]
+    command: ["--ip", "0.0.0.0", "--port", "8086", "-e", "tests/_data/expectations"]
+    volumes:
+      - "./.phiremock:/.phiremock"
