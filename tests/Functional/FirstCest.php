@@ -16,5 +16,6 @@ class FirstCest
     {
         $I->amOnPage('/');
         $I->seeNumberOfElements('p', 10);
+        $I->see('API Design for C++');
     }
 }
