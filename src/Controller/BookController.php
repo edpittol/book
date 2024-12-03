@@ -26,15 +26,11 @@ class BookController extends AbstractController
                 ],
             ]
         );
+
         $content = $response->toArray();
 
-        $responseText = '';
-
-        foreach($content['items'] as $item) {
-            $title = $item['volumeInfo']['title'];
-            $responseText .= "<p>$title</p>";
-        }
-
-        return new Response($responseText);
+        return $this->render('book/home.html.twig', [
+            'books' => $content['items'] ?? []
+        ]);
     }
 }
