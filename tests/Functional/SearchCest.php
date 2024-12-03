@@ -5,16 +5,19 @@ namespace App\Tests\Functional;
 
 use App\Tests\Support\FunctionalTester;
 
-class FirstCest
+class SearchCest
 {
     public function _before(FunctionalTester $I)
     {
     }
 
-    // tests
     public function tryToTest(FunctionalTester $I)
     {
         $I->amOnPage('/');
+        $I->submitForm('form', [
+            'title' => 'API'
+        ]);
+
         $I->seeNumberOfElements('p', 10);
         $I->see('API Design for C++');
     }
