@@ -15,10 +15,13 @@ class SearchCest
     {
         $I->amOnPage('/');
         $I->submitForm('form', [
-            'title' => 'API'
+            'q' => 'API'
         ]);
 
-        $I->seeNumberOfElements('p', 10);
-        $I->see('API Design for C++');
+        $I->seeNumberOfElements('h2.title', 10);
+        $I->see('Search results for: API');
+        $I->see('API Design for C++', '.title');
+        $I->see('Author: Martin Reddy', '.author');
+        $I->see('API Design for C++ provides a comprehensive discussion', '.description');
     }
 }

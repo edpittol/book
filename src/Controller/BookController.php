@@ -18,14 +18,14 @@ class BookController extends AbstractController
     #[Route('/')]
     public function list(Request $request): Response
     {
-        $title = $request->query->get('title');
+        $query = $request->query->get('q');
 
-        if (! is_null($title)) {
+        if (! is_null($query)) {
             $response = $this->client->request(
                 'GET',
                 $this->getParameter('app.google_books_api.base_url') . 'volumes', [
                     'query' => [
-                        'q' => $title,
+                        'q' => $query,
                         'key' => $this->getParameter('app.google_books_api.key')
                     ],
                 ]
@@ -35,7 +35,8 @@ class BookController extends AbstractController
         }
 
         return $this->render('book/home.html.twig', [
-            'books' => $content['items'] ?? []
+            'books' => $content['items'] ?? [],
+            'query' => $query
         ]);
     }
 }

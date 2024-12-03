@@ -3,14 +3,20 @@
 {% block body %}
 
 <form method="get">
-    <input type="text" name="title" />
+    <input type="text" name="q" />
     <button type="submit">Submit</button>
 </form>
 
 <hr />
 
+{% if query %}
+<h1>Search results for: {{ query }}</h1>
+{% endif %}
+
 {% for book in books %}
-    <p>{{ book.volumeInfo.title }}</p>
+    <h2 class="title">{{ book.volumeInfo.title }}</h2>
+    <p class="author"><strong>Author: {{ book.volumeInfo.authors|join(', ') }}</strong></p>
+    <p class="description">Author: {{ book.volumeInfo.description }}</strong></p>
 {% endfor %}
 
 {% endblock %}
