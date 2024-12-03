@@ -19,9 +19,10 @@ class BookController extends AbstractController
     {
         $response = $this->client->request(
             'GET',
-            'https://www.googleapis.com/books/v1/volumes', [
+            $this->getParameter('app.google_books_api.base_url') . 'volumes', [
                 'query' => [
                     'q' => 'api',
+                    'key' => $this->getParameter('app.google_books_api.key')
                 ],
             ]
         );
