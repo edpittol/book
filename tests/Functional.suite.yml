@@ -8,11 +8,11 @@ modules:
     enabled:
         - Asserts
         - Symfony:
-              app_path: 'src'
-              environment: 'test'
-#        - Doctrine:
-#              depends: Symfony
-#              cleanup: true
+            app_path: 'src'
+            environment: 'test'
+        - Doctrine:
+            depends: Symfony
+            cleanup: true
         - Phiremock:
             host: localhost
             port: 8086
