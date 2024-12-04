@@ -14,9 +14,12 @@
 {% endif %}
 
 {% for book in books %}
-    <h2 class="title">{{ book.volumeInfo.title }}</h2>
-    <p class="author"><strong>Author: {{ book.volumeInfo.authors|join(', ') }}</strong></p>
-    <p class="description">Author: {{ book.volumeInfo.description }}</strong></p>
+    <div id={{ book.id }} class="book">
+        <h2 class="title">{{ book.volumeInfo.title }}</h2>
+        <p class="author"><strong>Author: {{ book.volumeInfo.authors|join(', ') }}</strong></p>
+        <p class="description">Author: {{ book.volumeInfo.description }}</strong></p>
+        <a class="bookmark" href={{ url('app_add_bookmark', parameters = {'id': book.id}) }}>Bookmark</a>
+    </div>
 {% endfor %}
 
 {% endblock %}
