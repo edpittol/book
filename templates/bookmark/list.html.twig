@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1>Bookmarks</h1>
+
+{% for book in books %}
+    {{ include('book/_book.html.twig', {book}) }}
+{% endfor %}
+
+{% endblock %}

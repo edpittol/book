@@ -23,4 +23,16 @@ class BookmarkCest
 
         $I->seeInRepository(Bookmark::class, ['google_books_id' => $bookmarkId]);
     }
+
+    public function listBookmarks(FunctionalTester $I)
+    {
+        $I->haveInRepository(Bookmark::class, ['google_books_id' => '6D64DwAAQBAJ']);
+
+        $I->amOnPage('/bookmarks');
+        $I->seeNumberOfElements('.book', 1);
+        $I->see('Bookmarks', 'h1');
+        $I->see('API Architecture', '.title');
+        $I->see('Author: Matthias Biehl', '.author');
+        $I->see('Looking for the big picture of building APIs', '.description');
+    }
 }
