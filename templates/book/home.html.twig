@@ -2,13 +2,6 @@
 
 {% block body %}
 
-<form method="get">
-    <input type="text" name="q" />
-    <button type="submit">Submit</button>
-</form>
-
-<hr />
-
 {% if query %}
 <h1>Search results for: {{ query }}</h1>
 {% endif %}
