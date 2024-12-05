@@ -4,12 +4,40 @@
 # If you need both WebDriver and PhpBrowser tests, create a separate suite for each.
 
 actor: AcceptanceTester
+
+extensions:
+    enabled:
+        - \Codeception\Extension\Phiremock
+    config:
+        \Codeception\Extension\Phiremock:
+            listen: phiremock:8086
+            wait_until_ready: true
+            wait_until_ready_timeout: 5
+            expectations_path: tests/_expectations
+
 modules:
     enabled:
-        - PhpBrowser:
-            url: https://localhost:8000
-# Add Codeception\Step\Retry trait to AcceptanceTester to enable retries
+        - WebDriver:
+            url: http://acceptance-server:8080
+            browser: chrome
+            host: selenium-hub
+            port: 4444
+            window_size: maximize
+            capabilities:
+                goog:chromeOptions:
+                    args: ["--disable-gpu", "--proxy-server='direct://'", "--proxy-bypass-list=*"]
+        - Phiremock:
+            host: phiremock
+            port: 8086
+            secure: false
+            reset_before_each_test: true
+        - Db:
+            dsn: 'sqlite:var/data/acceptance.db'
+            user: ''
+            password: ''
+            dump: 'tests/_data/dump.sql'
+            cleanup: true
+
 step_decorators:
-    - Codeception\Step\ConditionalAssertion
     - Codeception\Step\TryTo
     - Codeception\Step\Retry

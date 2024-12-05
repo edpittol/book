@@ -25,9 +25,16 @@ services:
   server:
     extends:
       service: php
-    command: ["-S", "0.0.0.0:8080", "--docroot", "/app/public"]
+    entrypoint: ["/usr/local/bin/server-entrypoint.sh"]
     ports:
       - "8080:8080"
+
+  acceptance-server:
+    extends:
+      service: server
+    environment:
+      - APP_ENV=acceptance
+    ports: !reset null
 
   codecept:
     extends:
@@ -57,11 +64,14 @@ services:
       - SE_OPTS=--log-level OFF
     ports:
       - "4444:4444"
+    depends_on:
+      - acceptance-server
+      - phiremock
 
   phiremock:
     extends:
       service: php
     entrypoint: ["vendor/bin/phiremock"]
-    command: ["--ip", "0.0.0.0", "--port", "8086", "-e", "tests/_data/expectations"]
+    command: ["--ip", "0.0.0.0", "--port", "8086", "-e", "tests/_expectations"]
     volumes:
       - "./.phiremock:/.phiremock"

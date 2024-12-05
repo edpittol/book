@@ -99,9 +99,11 @@
     "require-dev": {
         "codeception/codeception": "^5.1",
         "codeception/module-asserts": "^3.0",
+        "codeception/module-db": "^3.1",
         "codeception/module-doctrine": "^3.1",
         "codeception/module-phpbrowser": "^3.0",
         "codeception/module-symfony": "^3.5",
+        "codeception/module-webdriver": "^4.0",
         "mcustiel/phiremock-codeception-extension": "^3.1",
         "mcustiel/phiremock-codeception-module": "^2.0",
         "mcustiel/phiremock-server": "^1.4",
