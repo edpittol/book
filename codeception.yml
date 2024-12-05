@@ -10,14 +10,6 @@ actor_suffix: Tester
 extensions:
     enabled:
         - Codeception\Extension\RunFailed
-        - \Codeception\Extension\Phiremock
-    config:
-        \Codeception\Extension\Phiremock:
-            listen: 0.0.0.0:8086
-            wait_until_ready: true
-            wait_until_ready_timeout: 5
-            expectations_path: tests/_expectations
-            suites: []
 
 params:
     - .env
