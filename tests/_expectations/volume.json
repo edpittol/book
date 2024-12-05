@@ -2,7 +2,7 @@
     "version": "2",
     "on": {
         "method": { "isSameString": "GET" },
-        "url": { "isSameString" : "/volumes/6D64DwAAQBAJ" }
+        "url": { "matches" : "~^/volumes/6D64DwAAQBAJ\\?key=(\\w+)~" }
     },
     "then": {
         "response": {

@@ -2,16 +2,18 @@
 
 namespace App\Controller;
 
+use App\Service\BookService;
+use App\Service\GoogleBooksClient;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class BookController extends AbstractController
 {
     public function __construct(
-        private HttpClientInterface $client,
+        private GoogleBooksClient $client,
+        private BookService $bookService,
     ) {
     }
 
@@ -21,21 +23,16 @@ class BookController extends AbstractController
         $query = $request->query->get('q');
 
         if (! is_null($query)) {
-            $response = $this->client->request(
-                'GET',
-                $this->getParameter('app.google_books_api.base_url') . 'volumes', [
-                    'query' => [
-                        'q' => $query,
-                        'key' => $this->getParameter('app.google_books_api.key')
-                    ],
-                ]
-            );
+            $volumes = $this->client->searchBooks($query);
 
-            $content = $response->toArray();
+            $books = [];
+            foreach ($volumes as $volume) {
+                $books[] = $this->bookService->loadBook($volume->id, $volume);
+            }
         }
 
         return $this->render('book/home.html.twig', [
-            'books' => $content['items'] ?? [],
+            'books' => $books ?? [],
             'query' => $query
         ]);
     }
