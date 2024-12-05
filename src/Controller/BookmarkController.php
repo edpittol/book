@@ -50,4 +50,15 @@ class BookmarkController extends AbstractController
             return new RedirectResponse($referer);
         }
     }
+
+    #[Route('/bookmark/{id}/remove', name: 'app_remove_bookmark')]
+    public function removeBookmark(EntityManagerInterface $entityManager, Request $request, string $id): Response
+    {
+        $bookmark = $entityManager->getRepository(Bookmark::class)->findOneBy(['google_books_id' => $id]);
+
+        $entityManager->remove($bookmark);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_list_bookmarks');
+    }
 }

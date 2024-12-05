@@ -2,5 +2,9 @@
     <h2 class="title">{{ book.volume.title }}</h2>
     <p class="author"><strong>Author: {{ book.volume.authors|join(', ') }}</strong></p>
     <p class="description">{{ book.volume.description }}</strong></p>
+    {% if book.isBookmarked %}
+    <a class="bookmark" href={{ url('app_remove_bookmark', parameters = {'id': book.volume.id}) }}>Remove Bookmark</a>
+    {% else %}
     <a class="bookmark" href={{ url('app_add_bookmark', parameters = {'id': book.volume.id}) }}>Bookmark</a>
+    {% endif %}
 </div>

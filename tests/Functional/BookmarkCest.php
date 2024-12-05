@@ -35,4 +35,13 @@ class BookmarkCest
         $I->see('Author: Matthias Biehl', '.author');
         $I->see('Looking for the big picture of building APIs', '.description');
     }
+
+    public function removeBookmark(FunctionalTester $I)
+    {
+        $I->haveInRepository(Bookmark::class, ['google_books_id' => '6D64DwAAQBAJ']);
+
+        $I->amOnPage('/bookmarks');
+        $I->click('Remove Bookmark');
+        $I->seeNumberOfElements('.book', 0);
+    }
 }
