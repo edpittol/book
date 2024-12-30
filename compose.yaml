@@ -75,3 +75,10 @@ services:
     command: ["--ip", "0.0.0.0", "--port", "8086", "-e", "tests/_expectations"]
     volumes:
       - "./.phiremock:/.phiremock"
+
+  php-cs-fix:
+    extends:
+      service: php
+    entrypoint: ["vendor/bin/php-cs-fixer"]
+    environment:
+      - PHP_CS_FIXER_IGNORE_ENV=1
