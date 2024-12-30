@@ -12,3 +12,8 @@ parameters:
     tmpDir: var
     doctrine:
         objectManagerLoader: tests/object-manager.php
+    ignoreErrors:
+        -
+            message: "#^Class App\\\\Form\\\\Type\\\\BookSearchType extends generic class Symfony\\\\Component\\\\Form\\\\AbstractType but does not specify its types\\: TData$#"
+            count: 1
+            path: src/Form/Type/BookSearchType.php

@@ -6,7 +6,7 @@ use App\Adapter\VolumeAdapter;
 
 class VolumeAdapterTest extends \Codeception\Test\Unit
 {
-    public function testSomeFeature()
+    public function testSomeFeature(): void
     {
         $id = 'djG552fTNb8C';
         $title = 'O Programador Pragmático: De Aprendiz a Mestre';

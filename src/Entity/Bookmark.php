@@ -15,7 +15,7 @@ class Bookmark
     private ?int $id = null;
 
     #[ORM\Column(length: 12)]
-    private ?string $google_books_id = null;
+    private string $google_books_id;
 
     public function getId(): ?int
     {

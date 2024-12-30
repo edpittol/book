@@ -6,7 +6,7 @@ use App\Tests\Support\AcceptanceTester;
 
 class BookmarkCest
 {
-    public function removeBookmark(AcceptanceTester $I)
+    public function removeBookmark(AcceptanceTester $I): void
     {
         $I->amOnPage('/');
 

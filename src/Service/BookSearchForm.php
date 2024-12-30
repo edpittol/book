@@ -6,6 +6,7 @@ use App\Entity\Search;
 use App\Form\Type\BookSearchType;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
 
 class BookSearchForm
 {
@@ -14,7 +15,10 @@ class BookSearchForm
     ) {
     }
 
-    public function create(): Form
+    /**
+     * @return FormInterface<Form>
+     */
+    public function create(): FormInterface
     {
         $search = new Search();
         $form = $this->formFactory->create(BookSearchType::class, $search);

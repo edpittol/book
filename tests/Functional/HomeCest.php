@@ -6,11 +6,7 @@ use App\Tests\Support\FunctionalTester;
 
 class HomeCest
 {
-    public function _before(FunctionalTester $I)
-    {
-    }
-
-    public function tryToTest(FunctionalTester $I)
+    public function tryToTest(FunctionalTester $I): void
     {
         $I->amOnPage('/');
         $I->dontSeeElement('p');

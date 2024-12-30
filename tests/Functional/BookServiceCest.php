@@ -8,7 +8,7 @@ use App\Tests\Support\FunctionalTester;
 
 class BookServiceCest
 {
-    public function loadBook(FunctionalTester $I)
+    public function loadBook(FunctionalTester $I): void
     {
         $googleBooksId = '6D64DwAAQBAJ';
         $I->haveInRepository(Bookmark::class, ['google_books_id' => $googleBooksId]);

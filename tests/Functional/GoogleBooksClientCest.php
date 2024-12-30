@@ -7,7 +7,7 @@ use App\Tests\Support\FunctionalTester;
 
 class GoogleBooksClientCest
 {
-    public function searchBooks(FunctionalTester $I)
+    public function searchBooks(FunctionalTester $I): void
     {
         /** @var GoogleBooksClient $service */
         $service = $I->grabService(GoogleBooksClient::class);
@@ -18,7 +18,7 @@ class GoogleBooksClientCest
         $I->assertStringStartsWith('API Design for C++ provides a comprehensive discussion', strip_tags($volumes[2]->description));
     }
 
-    public function getBookDetails(FunctionalTester $I)
+    public function getBookDetails(FunctionalTester $I): void
     {
         /** @var GoogleBooksClient $service */
         $service = $I->grabService(GoogleBooksClient::class);

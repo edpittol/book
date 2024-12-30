@@ -16,6 +16,9 @@ class GoogleBooksClient
     ) {
     }
 
+    /**
+     * @return Volume[]
+     */
     public function searchBooks(string $query): array
     {
         $response = $this->client->request('GET', $this->googleBooksApiBaseUrl.'volumes', [

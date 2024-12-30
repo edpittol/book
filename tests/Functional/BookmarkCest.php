@@ -7,7 +7,7 @@ use App\Tests\Support\FunctionalTester;
 
 class BookmarkCest
 {
-    public function bookmarkABook(FunctionalTester $I)
+    public function bookmarkABook(FunctionalTester $I): void
     {
         $I->amOnPage('/');
         $I->submitSymfonyForm('book_search', [
@@ -22,7 +22,7 @@ class BookmarkCest
         $I->seeInRepository(Bookmark::class, ['google_books_id' => $bookmarkId]);
     }
 
-    public function listBookmarks(FunctionalTester $I)
+    public function listBookmarks(FunctionalTester $I): void
     {
         $I->haveInRepository(Bookmark::class, ['google_books_id' => '6D64DwAAQBAJ']);
 
@@ -34,7 +34,7 @@ class BookmarkCest
         $I->see('Looking for the big picture of building APIs', '.description');
     }
 
-    public function removeBookmark(FunctionalTester $I)
+    public function removeBookmark(FunctionalTester $I): void
     {
         $I->haveInRepository(Bookmark::class, ['google_books_id' => '6D64DwAAQBAJ']);
 

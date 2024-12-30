@@ -6,6 +6,16 @@ use App\Data\Volume;
 
 class VolumeAdapter
 {
+    /**
+     * @param array{
+     *     id: string,
+     *     volumeInfo: array{
+     *         title: string,
+     *         authors: string[],
+     *         description: string
+     *     }
+     * } $item
+     */
     public function fromGoogleClientItem(array $item): Volume
     {
         return new Volume(

@@ -6,7 +6,7 @@ use App\Tests\Support\FunctionalTester;
 
 class SearchCest
 {
-    public function search(FunctionalTester $I)
+    public function search(FunctionalTester $I): void
     {
         $I->amOnPage('/');
         $I->submitSymfonyForm('book_search', [
