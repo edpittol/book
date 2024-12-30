@@ -21,6 +21,7 @@ services:
     entrypoint: ["/usr/bin/composer"]
     volumes:
       - "~/.docker_cache/composer:/.cache"
+      - "./.phiremock:/.phiremock"
     environment:
       - PHP_CS_FIXER_IGNORE_ENV=1
 
