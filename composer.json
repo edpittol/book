@@ -86,6 +86,12 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "qa": [
+            "codecept run Unit",
+            "codecept run Functional",
+            "phpstan --memory-limit=256M analyse",
+            "rector --dry-run"
         ]
     },
     "conflict": {
