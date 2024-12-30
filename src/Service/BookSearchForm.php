@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service;
 
 use App\Entity\Search;
@@ -11,7 +13,7 @@ use Symfony\Component\Form\FormInterface;
 class BookSearchForm
 {
     public function __construct(
-        private FormFactoryInterface $formFactory,
+        private readonly FormFactoryInterface $formFactory,
     ) {
     }
 
@@ -21,8 +23,7 @@ class BookSearchForm
     public function create(): FormInterface
     {
         $search = new Search();
-        $form = $this->formFactory->create(BookSearchType::class, $search);
 
-        return $form;
+        return $this->formFactory->create(BookSearchType::class, $search);
     }
 }

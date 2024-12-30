@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\Search;
@@ -14,8 +16,8 @@ use Symfony\Component\Routing\Attribute\Route;
 class BookController extends AbstractController
 {
     public function __construct(
-        private GoogleBooksClient $client,
-        private BookService $bookService,
+        private readonly GoogleBooksClient $googleBooksClient,
+        private readonly BookService $bookService,
     ) {
     }
 
@@ -26,10 +28,11 @@ class BookController extends AbstractController
         $form = $this->createForm(BookSearchType::class, $search);
 
         $form->handleRequest($request);
+
         $search = $form->getData();
         $query = $search->getQuery();
         if ($form->isSubmitted() && $form->isValid()) {
-            $volumes = $this->client->searchBooks($query);
+            $volumes = $this->googleBooksClient->searchBooks($query);
 
             $books = [];
             foreach ($volumes as $volume) {

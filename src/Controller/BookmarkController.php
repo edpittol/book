@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\Bookmark;
@@ -14,16 +16,16 @@ use Symfony\Component\Routing\Attribute\Route;
 class BookmarkController extends AbstractController
 {
     public function __construct(
-        private BookService $bookService,
+        private readonly BookService $bookService,
     ) {
     }
 
     #[Route('/bookmarks', name: 'app_list_bookmarks')]
     public function listBookmarks(EntityManagerInterface $entityManager): Response
     {
-        $repository = $entityManager->getRepository(Bookmark::class);
+        $entityRepository = $entityManager->getRepository(Bookmark::class);
         /** @var Bookmark[] $bookmarks */
-        $bookmarks = $repository->findAll();
+        $bookmarks = $entityRepository->findAll();
 
         $books = [];
         foreach ($bookmarks as $bookmark) {
@@ -53,7 +55,7 @@ class BookmarkController extends AbstractController
     }
 
     #[Route('/bookmark/{id}/remove', name: 'app_remove_bookmark')]
-    public function removeBookmark(EntityManagerInterface $entityManager, Request $request, string $id): Response
+    public function removeBookmark(EntityManagerInterface $entityManager, string $id): Response
     {
         $bookmark = $entityManager->getRepository(Bookmark::class)->findOneBy(['google_books_id' => $id]);
 

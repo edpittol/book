@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service;
 
 use App\Adapter\VolumeAdapter;
@@ -9,10 +11,10 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 class GoogleBooksClient
 {
     public function __construct(
-        private HttpClientInterface $client,
-        private VolumeAdapter $volumeAdapter,
-        private string $googleBooksApiBaseUrl,
-        private string $googleBooksApiKey,
+        private readonly HttpClientInterface $httpClient,
+        private readonly VolumeAdapter $volumeAdapter,
+        private readonly string $googleBooksApiBaseUrl,
+        private readonly string $googleBooksApiKey,
     ) {
     }
 
@@ -21,7 +23,7 @@ class GoogleBooksClient
      */
     public function searchBooks(string $query): array
     {
-        $response = $this->client->request('GET', $this->googleBooksApiBaseUrl.'volumes', [
+        $response = $this->httpClient->request('GET', $this->googleBooksApiBaseUrl.'volumes', [
             'query' => [
                 'q' => $query,
                 'key' => $this->googleBooksApiKey,
@@ -40,15 +42,14 @@ class GoogleBooksClient
 
     public function getBookDetails(string $googleBooksId): Volume
     {
-        $response = $this->client->request('GET', $this->googleBooksApiBaseUrl.'volumes/'.$googleBooksId, [
+        $response = $this->httpClient->request('GET', $this->googleBooksApiBaseUrl.'volumes/'.$googleBooksId, [
             'query' => [
                 'key' => $this->googleBooksApiKey,
             ],
         ]);
 
         $item = $response->toArray();
-        $volume = $this->volumeAdapter->fromGoogleClientItem($item);
 
-        return $volume;
+        return $this->volumeAdapter->fromGoogleClientItem($item);
     }
 }

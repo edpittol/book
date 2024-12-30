@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Unit;
 
 use App\Adapter\VolumeAdapter;
 
-class VolumeAdapterTest extends \Codeception\Test\Unit
+final class VolumeAdapterTest extends \Codeception\Test\Unit
 {
     public function testSomeFeature(): void
     {
@@ -22,12 +24,12 @@ class VolumeAdapterTest extends \Codeception\Test\Unit
             ],
         ];
 
-        $adapter = new VolumeAdapter();
-        $volume = $adapter->fromGoogleClientItem($item);
+        $volumeAdapter = new VolumeAdapter();
+        $volume = $volumeAdapter->fromGoogleClientItem($item);
 
-        $this->assertEquals($id, $volume->id);
-        $this->assertEquals($title, $volume->title);
-        $this->assertEquals($authors, $volume->authors);
-        $this->assertEquals($description, $volume->description);
+        $this->assertSame($id, $volume->id);
+        $this->assertSame($title, $volume->title);
+        $this->assertSame($authors, $volume->authors);
+        $this->assertSame($description, $volume->description);
     }
 }
