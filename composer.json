@@ -48,6 +48,7 @@
     "config": {
         "allow-plugins": {
             "php-http/discovery": true,
+            "phpstan/extension-installer": true,
             "symfony/flex": true,
             "symfony/runtime": true
         },
@@ -108,6 +109,9 @@
         "mcustiel/phiremock-codeception-extension": "^3.1",
         "mcustiel/phiremock-codeception-module": "^2.0",
         "mcustiel/phiremock-server": "^1.5.1",
+        "phpstan/extension-installer": "^1.4",
+        "phpstan/phpstan-doctrine": "^2.0",
+        "phpstan/phpstan-symfony": "^2.0",
         "phpunit/phpunit": "^11.5.2",
         "symfony/browser-kit": "7.2.*",
         "symfony/css-selector": "7.2.*",
