@@ -8,7 +8,7 @@ class Volume
         public readonly string $id,
         public readonly string $title,
         public readonly array $authors,
-        public readonly string $description
-    )
-    {}
+        public readonly string $description,
+    ) {
+    }
 }

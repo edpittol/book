@@ -6,7 +6,7 @@ use App\Repository\BookmarkRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: BookmarkRepository::class)]
-#[ORM\UniqueConstraint(name: "google_books_id", columns: ["google_books_id"])]
+#[ORM\UniqueConstraint(name: 'google_books_id', columns: ['google_books_id'])]
 class Bookmark
 {
     #[ORM\Id]

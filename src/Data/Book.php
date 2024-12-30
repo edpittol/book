@@ -7,6 +7,6 @@ class Book
     public function __construct(
         public readonly Volume $volume,
         public readonly bool $isBookmarked,
-    )
-    {}
+    ) {
+    }
 }

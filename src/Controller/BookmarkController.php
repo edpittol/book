@@ -30,9 +30,9 @@ class BookmarkController extends AbstractController
             $id = $bookmark->getGoogleBooksId();
             $books[] = $this->bookService->loadBook($id);
         }
-        
+
         return $this->render('bookmark/list.html.twig', [
-            'books' => $books
+            'books' => $books,
         ]);
     }
 
@@ -42,11 +42,12 @@ class BookmarkController extends AbstractController
         try {
             $bookmark = new Bookmark();
             $bookmark->setGoogleBooksId($id);
-    
+
             $entityManager->persist($bookmark);
             $entityManager->flush();
         } finally {
             $referer = $request->headers->get('referer');
+
             return new RedirectResponse($referer);
         }
     }

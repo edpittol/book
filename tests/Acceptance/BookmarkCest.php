@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Tests\Acceptance;
 
 use App\Tests\Support\AcceptanceTester;
@@ -12,7 +11,7 @@ class BookmarkCest
         $I->amOnPage('/');
 
         $I->submitForm('//form[@name="book_search"]', [
-            'book_search[query]' => 'API'
+            'book_search[query]' => 'API',
         ]);
 
         $I->waitForElement('//div[1]/a', 2);

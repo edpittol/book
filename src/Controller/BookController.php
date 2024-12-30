@@ -40,7 +40,7 @@ class BookController extends AbstractController
         return $this->render('book/home.html.twig', [
             'books' => $books ?? [],
             'form' => $form,
-            'query' => $search->getQuery()
+            'query' => $search->getQuery(),
         ]);
     }
 }

@@ -16,7 +16,7 @@ class BookServiceCest
         /** @var BookService $service */
         $service = $I->grabService(BookService::class);
         $book = $service->loadBook($googleBooksId);
-        
+
         $I->assertEquals('API Architecture', $book->volume->title);
         $I->assertEquals('Matthias Biehl', $book->volume->authors[0]);
         $I->assertStringStartsWith('Looking for the big picture of building APIs', strip_tags($book->volume->description));

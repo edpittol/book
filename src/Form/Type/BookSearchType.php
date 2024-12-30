@@ -15,7 +15,7 @@ class BookSearchType extends AbstractType
     {
         $builder
             ->add('query', TextType::class, [
-                'empty_data' => ''
+                'empty_data' => '',
             ])
             ->add('search', SubmitType::class)
             ->setMethod('GET')

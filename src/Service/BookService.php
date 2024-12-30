@@ -15,7 +15,8 @@ class BookService
     ) {
     }
 
-    public function loadBook(string $id, Volume $volume = null): Book {
+    public function loadBook(string $id, ?Volume $volume = null): Book
+    {
         if (is_null($volume)) {
             $volume = $this->client->getBookDetails($id);
         }

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Tests\Functional;
 
 use App\Entity\Bookmark;
@@ -12,13 +11,13 @@ class BookmarkCest
     {
         $I->amOnPage('/');
         $I->submitSymfonyForm('book_search', [
-            '[query]' => 'API'
-        ]); 
+            '[query]' => 'API',
+        ]);
 
         $bookmarkXPath = '//html/body/div[1]';
         $bookmarkId = $I->grabAttributeFrom($bookmarkXPath, 'id');
         $I->makeHtmlSnapshot();
-        $I->click('Bookmark', $bookmarkXPath . '/a');
+        $I->click('Bookmark', $bookmarkXPath.'/a');
 
         $I->seeInRepository(Bookmark::class, ['google_books_id' => $bookmarkId]);
     }

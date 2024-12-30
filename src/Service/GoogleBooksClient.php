@@ -12,13 +12,13 @@ class GoogleBooksClient
         private HttpClientInterface $client,
         private VolumeAdapter $volumeAdapter,
         private string $googleBooksApiBaseUrl,
-        private string $googleBooksApiKey
+        private string $googleBooksApiKey,
     ) {
     }
 
     public function searchBooks(string $query): array
     {
-        $response = $this->client->request('GET', $this->googleBooksApiBaseUrl . 'volumes', [
+        $response = $this->client->request('GET', $this->googleBooksApiBaseUrl.'volumes', [
             'query' => [
                 'q' => $query,
                 'key' => $this->googleBooksApiKey,
@@ -26,7 +26,7 @@ class GoogleBooksClient
         ]);
 
         $responseData = $response->toArray();
-        
+
         $volumes = [];
         foreach ($responseData['items'] as $item) {
             $volumes[] = $this->volumeAdapter->fromGoogleClientItem($item);
@@ -37,7 +37,7 @@ class GoogleBooksClient
 
     public function getBookDetails(string $googleBooksId): Volume
     {
-        $response = $this->client->request('GET', $this->googleBooksApiBaseUrl . 'volumes/' . $googleBooksId, [
+        $response = $this->client->request('GET', $this->googleBooksApiBaseUrl.'volumes/'.$googleBooksId, [
             'query' => [
                 'key' => $this->googleBooksApiKey,
             ],
