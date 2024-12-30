@@ -8,13 +8,12 @@ use App\Tests\Support\FunctionalTester;
 
 class BookmarkCest
 {
-    public function _before(FunctionalTester $I)
-    {
-    }
-
     public function bookmarkABook(FunctionalTester $I)
     {
-        $I->amOnPage('/?q=API');
+        $I->amOnPage('/');
+        $I->submitSymfonyForm('book_search', [
+            '[query]' => 'API'
+        ]); 
 
         $bookmarkXPath = '//html/body/div[1]';
         $bookmarkId = $I->grabAttributeFrom($bookmarkXPath, 'id');

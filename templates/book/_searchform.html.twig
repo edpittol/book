@@ -1,0 +1,15 @@
+{% set form = search_form.create().createView() %}
+
+{{ form_start(form) }}
+    <div>
+        {{ form_errors(form) }}
+    </div>
+
+    {{ form_widget(form.query) }}
+
+    <div>
+        {{ form_errors(form.query) }}
+    </div>
+
+    {{ form_widget(form.search) }}
+{{ form_end(form) }}

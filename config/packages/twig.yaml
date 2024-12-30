@@ -1,6 +1,9 @@
 twig:
     file_name_pattern: '*.twig'
 
+    globals:
+        search_form: '@App\Service\BookSearchForm'
+
 when@test:
     twig:
         strict_variables: true

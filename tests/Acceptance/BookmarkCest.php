@@ -9,7 +9,13 @@ class BookmarkCest
 {
     public function removeBookmark(AcceptanceTester $I)
     {
-        $I->amOnPage('/?q=API');
+        $I->amOnPage('/');
+
+        $I->submitForm('//form[@name="book_search"]', [
+            'book_search[query]' => 'API'
+        ]);
+
+        $I->waitForElement('//div[1]/a', 2);
         $I->click('//div[1]/a');
 
         $I->amOnPage('/bookmarks');

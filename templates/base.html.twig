@@ -12,10 +12,7 @@
         {% endblock %}
     </head>
     <body>
-        <form method="get">
-            <input type="text" name="q" />
-            <button type="submit">Submit</button>
-        </form>
+        {{ include('book/_searchform.html.twig') }}
 
         <a href={{ url('app_list_bookmarks') }}>Bookmarks</a>
 

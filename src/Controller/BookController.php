@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Search;
+use App\Form\Type\BookSearchType;
 use App\Service\BookService;
 use App\Service\GoogleBooksClient;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,9 +22,13 @@ class BookController extends AbstractController
     #[Route('/')]
     public function list(Request $request): Response
     {
-        $query = $request->query->get('q');
+        $search = new Search();
+        $form = $this->createForm(BookSearchType::class, $search);
 
-        if (! is_null($query)) {
+        $form->handleRequest($request);
+        $search = $form->getData();
+        $query = $search->getQuery();
+        if ($form->isSubmitted() && $form->isValid()) {
             $volumes = $this->client->searchBooks($query);
 
             $books = [];
@@ -33,7 +39,8 @@ class BookController extends AbstractController
 
         return $this->render('book/home.html.twig', [
             'books' => $books ?? [],
-            'query' => $query
+            'form' => $form,
+            'query' => $search->getQuery()
         ]);
     }
 }
