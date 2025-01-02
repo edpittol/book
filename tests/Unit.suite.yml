@@ -6,3 +6,6 @@ actor: UnitTester
 modules:
     enabled:
         - Asserts
+
+coverage:
+    enabled: true

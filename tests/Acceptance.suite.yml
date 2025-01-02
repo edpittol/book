@@ -41,3 +41,6 @@ modules:
 step_decorators:
     - Codeception\Step\TryTo
     - Codeception\Step\Retry
+
+coverage:
+    enabled: false

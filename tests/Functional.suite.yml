@@ -27,3 +27,6 @@ modules:
             port: 8086
             secure: false
             reset_before_each_test: true
+
+coverage:
+    enabled: true

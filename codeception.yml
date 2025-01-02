@@ -18,3 +18,7 @@ settings:
     shuffle: true
     colors: true
     report_useless_tests: true
+
+coverage:
+    include:
+        - src/*

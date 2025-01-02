@@ -15,7 +15,7 @@ RUN wget https://get.symfony.com/cli/installer -O - | bash \
 	&& mv /root/.symfony5/bin/symfony /usr/local/bin/symfony
 
 RUN { \
-	echo 'xdebug.mode = debug'; \
+	echo 'xdebug.mode = ${XDEBUG_MODE}'; \
 	echo 'xdebug.start_with_request = yes'; \
 	echo 'xdebug.client_host = 172.17.0.1'; \
 	echo 'xdebug.log = /tmp/xdebug.log'; \
