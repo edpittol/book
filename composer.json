@@ -7,6 +7,7 @@
         "php": ">=8.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "cweagans/composer-patches": "^1.7",
         "doctrine/dbal": "^4.2.1",
         "doctrine/doctrine-bundle": "^2.13.1",
         "doctrine/doctrine-migrations-bundle": "^3.3.1",
@@ -47,11 +48,12 @@
     },
     "config": {
         "allow-plugins": {
+            "cweagans/composer-patches": true,
+            "infection/extension-installer": true,
             "php-http/discovery": true,
             "phpstan/extension-installer": true,
             "symfony/flex": true,
-            "symfony/runtime": true,
-            "infection/extension-installer": true
+            "symfony/runtime": true
         },
         "bump-after-update": true,
         "sort-packages": true
@@ -99,6 +101,12 @@
         "symfony/symfony": "*"
     },
     "extra": {
+        "composer-exit-on-patch-failure": true,
+        "patches": {
+            "mcustiel/phiremock-client": {
+                "Implicitly marking parameters as nullable is deprecated in PHP8.4, the explicit nullable type must be used instead": "patches/mcustiel/phiremock-client/88f96ca326162f432fcd3b09ef98cab0f4afed87.patch"
+            }
+        },
         "symfony": {
             "allow-contrib": false,
             "require": "7.2.*"
