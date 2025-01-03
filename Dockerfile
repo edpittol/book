@@ -1,7 +1,7 @@
 FROM php:8.4-alpine
 
 RUN apk add --update --no-cache --virtual .build-dependencies $PHPIZE_DEPS \
-	&& apk add bash chromium chromium-chromedriver git icu-dev libzip-dev linux-headers \
+	&& apk add bash chromium curl chromium-chromedriver git icu-dev libzip-dev linux-headers \
 	&& pecl install apcu xdebug \
 	&& docker-php-ext-enable apcu xdebug \
 	&& pecl clear-cache \
