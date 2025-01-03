@@ -89,10 +89,10 @@
             "@auto-scripts"
         ],
         "qa": [
-            "codecept run Unit",
-            "codecept run Functional",
+            "codecept run Unit,Functional --coverage-phpunit --coverage-xml --xml junit.xml",
             "phpstan --memory-limit=256M analyse",
-            "rector --dry-run"
+            "rector --dry-run",
+            "infection --coverage=tests/_output --skip-initial-tests"
         ]
     },
     "conflict": {
