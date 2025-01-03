@@ -1,0 +1,18 @@
+{
+    "$schema": "https://raw.githubusercontent.com/infection/infection/0.29.10/resources/schema.json",
+    "source": {
+        "directories": [
+            "src"
+        ]
+    },
+    "logs": {
+        "text": "var/log/infection/infection.log",
+        "summary": "var/log/infection/summary.log"
+    },
+    "mutators": {
+        "@default": true
+    },
+    "tmpDir": "var",
+    "testFramework": "codeception",
+    "testFrameworkOptions": "Functional,Unit"
+}
