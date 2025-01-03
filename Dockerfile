@@ -2,12 +2,11 @@ FROM php:8.4-alpine
 
 RUN apk add --update --no-cache --virtual .build-dependencies $PHPIZE_DEPS \
 	&& apk add bash chromium curl chromium-chromedriver git icu-dev libzip-dev linux-headers patch \
-	&& pecl install apcu xdebug \
-	&& docker-php-ext-enable apcu xdebug \
+	&& pecl install apcu pcov xdebug \
+	&& docker-php-ext-enable apcu pcov xdebug \
+	&& docker-php-ext-install intl mysqli zip \
 	&& pecl clear-cache \
-	&& apk del .build-dependencies
-
-RUN docker-php-ext-install intl mysqli zip
+	&& apk del .build-dependencies 
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
