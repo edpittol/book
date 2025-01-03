@@ -18,7 +18,6 @@ class BookmarkCest
 
         $bookmarkXPath = '//html/body/div[1]';
         $bookmarkId = $I->grabAttributeFrom($bookmarkXPath, 'id');
-        $I->makeHtmlSnapshot();
         $I->click('Bookmark', $bookmarkXPath.'/a');
 
         $I->seeInRepository(Bookmark::class, ['google_books_id' => $bookmarkId]);
@@ -38,10 +37,16 @@ class BookmarkCest
 
     public function removeBookmark(FunctionalTester $I): void
     {
-        $I->haveInRepository(Bookmark::class, ['google_books_id' => '6D64DwAAQBAJ']);
+        $bookmarkId = '6D64DwAAQBAJ';
+        $I->haveInRepository(Bookmark::class, ['google_books_id' => 'S39tDgAAQBAJ']);
+        $I->haveInRepository(Bookmark::class, ['google_books_id' => $bookmarkId]);
 
+        $bookmarkXPath = '//html/body/div[2]';
         $I->amOnPage('/bookmarks');
-        $I->click('Remove Bookmark');
-        $I->seeNumberOfElements('.book', 0);
+        $I->click($bookmarkXPath.'/a');
+        $I->makeHtmlSnapshot('bookmarks');
+        $I->seeNumberOfElements('.book', 1);
+
+        $I->assertEquals(0, $I->grabNumRecords(Bookmark::class, ['google_books_id' => $bookmarkId]), 'Bookmark cannot exists.');
     }
 }

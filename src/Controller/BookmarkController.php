@@ -6,7 +6,9 @@ namespace App\Controller;
 
 use App\Entity\Bookmark;
 use App\Service\BookService;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,8 +19,7 @@ class BookmarkController extends AbstractController
 {
     public function __construct(
         private readonly BookService $bookService,
-    ) {
-    }
+    ) {}
 
     #[Route('/bookmarks', name: 'app_list_bookmarks')]
     public function listBookmarks(EntityManagerInterface $entityManager): Response
@@ -39,19 +40,16 @@ class BookmarkController extends AbstractController
     }
 
     #[Route('/bookmark/{id}', name: 'app_add_bookmark')]
-    public function addBookmark(EntityManagerInterface $entityManager, Request $request, string $id): Response
+    public function addBookmark(EntityManagerInterface $entityManager, Request $request, string $id, ManagerRegistry $registry): Response
     {
-        try {
-            $bookmark = new Bookmark();
-            $bookmark->setGoogleBooksId($id);
+        $bookmark = new Bookmark();
+        $bookmark->setGoogleBooksId($id);
 
-            $entityManager->persist($bookmark);
-            $entityManager->flush();
-        } finally {
-            $referer = $request->headers->get('referer');
+        $entityManager->persist($bookmark);
+        $entityManager->flush();
 
-            return new RedirectResponse($referer);
-        }
+        $redirectUrl = $request->headers->get('referer');
+        return new RedirectResponse($redirectUrl);
     }
 
     #[Route('/bookmark/{id}/remove', name: 'app_remove_bookmark')]
