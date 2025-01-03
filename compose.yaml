@@ -2,31 +2,15 @@ services:
   php:
     build:
       context: .
-    working_dir: "/app"
-    volumes:
-      - ".:/app"
-    environment:
-      - XDEBUG_MODE=debug
-
-  symfony-cli:
-    extends:
-      service: php
-    entrypoint: ["/usr/local/bin/symfony"]
-    volumes:
-      - ~/.docker_cache/composer:/.composer/cache/
-      - ~/.docker_cache/symfony5:/.symfony5
-      - ~/.gitconfig:/.gitconfig
-
-  composer:
-    extends:
-      service: php
-    entrypoint: ["/usr/bin/composer"]
     volumes:
       - "~/.docker_cache/composer:/.cache"
+      - "~/.docker_cache/symfony5:/.symfony5"
+      - "~/.gitconfig:/.gitconfig"
+      - ".:/app"
       - "./.phiremock:/.phiremock"
     environment:
       - PHP_CS_FIXER_IGNORE_ENV=1
-      - XDEBUG_MODE=debug,coverage
+      - XDEBUG_MODE=debug
 
   server:
     extends:
@@ -41,13 +25,6 @@ services:
     environment:
       - APP_ENV=acceptance
     ports: !reset null
-
-  codecept:
-    extends:
-      service: composer
-    entrypoint: ["vendor/bin/codecept"]
-    volumes:
-      - "./.phiremock:/.phiremock"
   
   chrome:
     image: selenium/node-chrome

@@ -6,7 +6,7 @@ RUN apk add --update --no-cache --virtual .build-dependencies $PHPIZE_DEPS \
 	&& docker-php-ext-enable apcu pcov xdebug \
 	&& docker-php-ext-install intl mysqli zip \
 	&& pecl clear-cache \
-	&& apk del .build-dependencies 
+	&& apk del .build-dependencies
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
@@ -25,3 +25,7 @@ RUN { \
 } > /usr/local/etc/php/conf.d/php-override.ini
 
 COPY server-entrypoint.sh /usr/local/bin/server-entrypoint.sh
+
+ENV PATH="$PATH:/app/vendor/bin"
+
+WORKDIR /app
