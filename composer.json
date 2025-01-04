@@ -94,6 +94,7 @@
             "codecept run Unit,Functional --coverage-phpunit --coverage-xml --xml junit.xml",
             "phpstan --memory-limit=256M analyse",
             "rector --dry-run",
+            "php-cs-fixer check",
             "infection --coverage=tests/_output --skip-initial-tests"
         ]
     },
