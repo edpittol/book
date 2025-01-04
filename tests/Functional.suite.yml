@@ -7,6 +7,8 @@ actor: FunctionalTester
 extensions:
     enabled:
         - \Codeception\Extension\Phiremock
+        - \Codeception\Extension\RunBefore:
+            - symfony console doctrine:migrations:migrate --env=test
     config:
         \Codeception\Extension\Phiremock:
             listen: 0.0.0.0:8086
