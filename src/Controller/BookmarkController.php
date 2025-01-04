@@ -6,7 +6,6 @@ namespace App\Controller;
 
 use App\Entity\Bookmark;
 use App\Service\BookService;
-use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,7 +18,8 @@ class BookmarkController extends AbstractController
 {
     public function __construct(
         private readonly BookService $bookService,
-    ) {}
+    ) {
+    }
 
     #[Route('/bookmarks', name: 'app_list_bookmarks')]
     public function listBookmarks(EntityManagerInterface $entityManager): Response
@@ -49,6 +49,7 @@ class BookmarkController extends AbstractController
         $entityManager->flush();
 
         $redirectUrl = $request->headers->get('referer');
+
         return new RedirectResponse($redirectUrl);
     }
 
