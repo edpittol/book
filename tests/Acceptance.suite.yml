@@ -7,8 +7,6 @@ actor: AcceptanceTester
 
 extensions:
     enabled:
-        - \Codeception\Extension\Phiremock
-    config:
         \Codeception\Extension\Phiremock:
             listen: phiremock:8086
             wait_until_ready: true
