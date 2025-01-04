@@ -1,6 +1,5 @@
 #!/bin/sh
 
-/usr/local/bin/php bin/console doctrine:database:create
-/usr/local/bin/php bin/console doctrine:migrations:migrate
+symfony console doctrine:migrations:migrate --no-interaction
 
-/usr/local/bin/php -S 0.0.0.0:8080 --docroot /app/public
+symfony local:server:start --listen-ip=0.0.0.0 --port=8080 --no-tls

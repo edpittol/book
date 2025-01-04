@@ -15,9 +15,11 @@ services:
   server:
     extends:
       service: php
-    entrypoint: ["/usr/local/bin/server-entrypoint.sh"]
+    entrypoint: ["server-entrypoint"]
     ports:
       - "8080:8080"
+    volumes:
+      - "./server-entrypoint.sh:/usr/local/bin/server-entrypoint"
 
   acceptance-server:
     extends:

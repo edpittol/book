@@ -24,8 +24,6 @@ RUN { \
 	echo 'error_reporting = E_ALL & ~E_DEPRECATED'; \
 } > /usr/local/etc/php/conf.d/php-override.ini
 
-COPY server-entrypoint.sh /usr/local/bin/server-entrypoint.sh
-
 ENV PATH="$PATH:/app/vendor/bin"
 
 WORKDIR /app
