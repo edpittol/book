@@ -85,13 +85,16 @@
             "importmap:install": "symfony-cmd"
         },
         "dataDir": "mkdir -p var/data",
+        "codeceptInstall": "codecept build",
         "post-install-cmd": [
             "@auto-scripts",
-            "@dataDir"
+            "@dataDir",
+            "@codeceptInstall"
         ],
         "post-update-cmd": [
             "@auto-scripts",
-            "@dataDir"
+            "@dataDir",
+            "@codeceptInstall"
         ],
         "qa": [
             "codecept run Unit,Functional --coverage-phpunit --coverage-xml --xml junit.xml",
