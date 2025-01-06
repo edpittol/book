@@ -1,0 +1,18 @@
+--- /dev/null
++++ ../ext/RunBefore.php
+@@ -87,8 +87,15 @@
+     {
+         $this->output->debug('[RunBefore] Starting ' . $command);
+ 
++        $env = $_ENV;
++        $server = $_SERVER ;
++        $_ENV = $_SERVER = []; 
++
+         $process = Process::fromShellCommandline($command, $this->getRootDir());
+         $process->start();
++
++        $_ENV = $env;
++        $_SERVER = $server;
+ 
+         return $process;
+     }

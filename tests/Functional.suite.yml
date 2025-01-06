@@ -12,7 +12,8 @@ extensions:
             wait_until_ready_timeout: 5
             expectations_path: tests/_expectations
         - \Codeception\Extension\RunBefore:
-            - symfony console doctrine:migrations:migrate --env=test
+            - bin/console --env=test doctrine:migrations:migrate --no-interaction
+
 modules:
     enabled:
         - Asserts

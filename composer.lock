@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7a63e0abe6e9af0818997b459588e4a8",
+    "content-hash": "30cf3e2a628e751d7e546e3319f59bb6",
     "packages": [
         {
             "name": "composer/semver",
@@ -14112,6 +14112,49 @@
             "time": "2024-11-19T10:12:55+00:00"
         },
         {
+            "name": "symplify/vendor-patches",
+            "version": "11.3.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symplify/vendor-patches.git",
+                "reference": "dec8ec588192a3ee0d886288395b5cd6a768126e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symplify/vendor-patches/zipball/dec8ec588192a3ee0d886288395b5cd6a768126e",
+                "reference": "dec8ec588192a3ee0d886288395b5cd6a768126e",
+                "shasum": ""
+            },
+            "require": {
+                "cweagans/composer-patches": "^1.7",
+                "php": ">=7.2"
+            },
+            "bin": [
+                "bin/vendor-patches"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Generate vendor patches for packages with single command",
+            "support": {
+                "issues": "https://github.com/symplify/vendor-patches/issues",
+                "source": "https://github.com/symplify/vendor-patches/tree/11.3.7"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/rectorphp",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/tomasvotruba",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-01-23T17:12:30+00:00"
+        },
+        {
             "name": "theseer/tokenizer",
             "version": "1.2.3",
             "source": {
@@ -14164,7 +14207,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
@@ -14172,6 +14215,6 @@
         "ext-ctype": "*",
         "ext-iconv": "*"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }

@@ -7,7 +7,7 @@
         "php": ">=8.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "cweagans/composer-patches": "^1.7",
+        "cweagans/composer-patches": "^1.7.3",
         "doctrine/dbal": "^4.2.1",
         "doctrine/doctrine-bundle": "^2.13.1",
         "doctrine/doctrine-migrations-bundle": "^3.3.1",
@@ -102,12 +102,15 @@
         "symfony/symfony": "*"
     },
     "extra": {
-        "composer-exit-on-patch-failure": true,
         "patches": {
+            "codeception/codeception": {
+                "Do not forward environment variables to the RunBefore extensions command": "patches/codeception/codeception/ext-runbefore-php.patch"
+            },
             "mcustiel/phiremock-client": {
                 "Implicitly marking parameters as nullable is deprecated in PHP8.4, the explicit nullable type must be used instead": "patches/mcustiel/phiremock-client/88f96ca326162f432fcd3b09ef98cab0f4afed87.patch"
             }
         },
+        "composer-exit-on-patch-failure": true,
         "symfony": {
             "allow-contrib": false,
             "require": "7.2.*"
@@ -127,17 +130,18 @@
         "mcustiel/phiremock-codeception-extension": "^3.1",
         "mcustiel/phiremock-codeception-module": "^2.0",
         "mcustiel/phiremock-server": "^1.5.1",
-        "phpstan/extension-installer": "^1.4",
-        "phpstan/phpstan-doctrine": "^2.0",
+        "phpstan/extension-installer": "^1.4.3",
+        "phpstan/phpstan-doctrine": "^2.0.1",
         "phpstan/phpstan-symfony": "^2.0",
         "phpunit/phpunit": "^11.5.2",
-        "rector/rector": "^2.0",
+        "rector/rector": "^2.0.4",
         "symfony/browser-kit": "7.2.*",
         "symfony/css-selector": "7.2.*",
         "symfony/debug-bundle": "7.2.*",
         "symfony/maker-bundle": "^1.61",
         "symfony/phpunit-bridge": "^7.2",
         "symfony/stopwatch": "7.2.*",
-        "symfony/web-profiler-bundle": "7.2.*"
+        "symfony/web-profiler-bundle": "7.2.*",
+        "symplify/vendor-patches": "^11.3.7"
     }
 }
