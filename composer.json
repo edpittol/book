@@ -84,11 +84,14 @@
             "assets:install %PUBLIC_DIR%": "symfony-cmd",
             "importmap:install": "symfony-cmd"
         },
+        "dataDir": "mkdir -p var/data",
         "post-install-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "@dataDir"
         ],
         "post-update-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "@dataDir"
         ],
         "qa": [
             "codecept run Unit,Functional --coverage-phpunit --coverage-xml --xml junit.xml",
