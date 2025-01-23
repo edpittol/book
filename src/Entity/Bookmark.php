@@ -19,11 +19,6 @@ class Bookmark
     #[ORM\Column(length: 12)]
     private string $google_books_id;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
     public function getGoogleBooksId(): ?string
     {
         return $this->google_books_id;
