@@ -20,5 +20,6 @@ settings:
     report_useless_tests: true
 
 coverage:
+    show_uncovered: true
     include:
         - src/*
