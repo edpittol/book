@@ -1,4 +1,4 @@
-FROM php:8.4-alpine
+FROM php:8.5-alpine
 
 RUN apk add --update --no-cache --virtual .build-dependencies $PHPIZE_DEPS \
 	&& apk add bash chromium curl chromium-chromedriver git icu-dev libzip-dev linux-headers patch \
@@ -22,6 +22,7 @@ RUN { \
 
 RUN { \
 	echo 'error_reporting = E_ALL & ~E_DEPRECATED'; \
+	echo 'register_argc_argv=On'; \
 } > /usr/local/etc/php/conf.d/php-override.ini
 
 ENV PATH="$PATH:/app/vendor/bin"

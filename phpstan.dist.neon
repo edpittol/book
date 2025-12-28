@@ -9,6 +9,7 @@ parameters:
     excludePaths:
         analyseAndScan:
             - tests/Support/_generated/*
+            - config/reference.php
     tmpDir: var
     doctrine:
         objectManagerLoader: tests/object-manager.php

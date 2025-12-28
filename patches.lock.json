@@ -1,0 +1,17 @@
+{
+    "_hash": "cc4a06655d4613c6b184c460a018b015746d32728cec4ea516108a524991a6e4",
+    "patches": {
+        "codeception/codeception": [
+            {
+                "package": "codeception/codeception",
+                "description": "Do not forward environment variables to the RunBefore extensions command",
+                "url": "patches/codeception/codeception/ext-runbefore-php.patch",
+                "sha256": "c10af8909ca13177d76f10b0636f7e55a9cfbdf5b446a46182420985139b4ba1",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            }
+        ]
+    }
+}

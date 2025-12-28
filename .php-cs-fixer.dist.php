@@ -9,6 +9,7 @@ $finder = (new PhpCsFixer\Finder())
 ;
 
 return (new PhpCsFixer\Config())
+    ->setUnsupportedPhpVersionAllowed(true)
     ->setRules([
         '@Symfony' => true,
     ])

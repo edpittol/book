@@ -7,7 +7,6 @@ namespace App\Controller;
 use App\Entity\Bookmark;
 use App\Service\BookService;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,7 +39,7 @@ class BookmarkController extends AbstractController
     }
 
     #[Route('/bookmark/{id}', name: 'app_add_bookmark')]
-    public function addBookmark(EntityManagerInterface $entityManager, Request $request, string $id, ManagerRegistry $registry): Response
+    public function addBookmark(EntityManagerInterface $entityManager, Request $request, string $id): Response
     {
         $bookmark = new Bookmark();
         $bookmark->setGoogleBooksId($id);

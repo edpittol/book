@@ -23,7 +23,6 @@ return RectorConfig::configure()
         naming: true,
         instanceOf: true,
         earlyReturn: true,
-        strictBooleans: true,
         carbon: true,
         rectorPreset: true,
         phpunitCodeQuality: true,
@@ -40,12 +39,12 @@ return RectorConfig::configure()
         phpunit: true,
     )
     ->withComposerBased(
+        twig: true,
         doctrine: true,
-        phpunit: true,
-        twig: true
+        phpunit: true
     )
     ->withSets([
-        SymfonySetList::SYMFONY_72,
+        SymfonySetList::SYMFONY_80,
         SymfonySetList::SYMFONY_CODE_QUALITY,
         SymfonySetList::SYMFONY_CONSTRUCTOR_INJECTION,
     ])

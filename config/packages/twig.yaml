@@ -4,6 +4,9 @@ twig:
     globals:
         search_form: '@App\Service\BookSearchForm'
 
+    form_themes:
+        - 'form_div_layout.html.twig'
+
 when@test:
     twig:
         strict_variables: true
